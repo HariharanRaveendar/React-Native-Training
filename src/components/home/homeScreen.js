@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {
+import {SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -10,64 +10,41 @@ import {
 
 import {AuthContext} from '../../Authentication/AuthProvider';
 
+import colors from '../../const/Theme';
+
 
 const  HomeScreen = ({navigation})=>{
   const {user, logout} = useContext(AuthContext);
   return(
-    <View style={styles.container}>
-    <Text style={styles.logo}>NewAPP</Text>
-    <Text>
-      Welcome ! {user.email}
-    </Text>
-    <TouchableOpacity style={styles.loginBtn} onPress={() => logout('asda')}>
-          <Text style={styles.loginText}>LogOut</Text>
-        </TouchableOpacity>
-  </View>
+    <SafeAreaView style={{backgroundColor: colors.white, flex: 1}}>
+            <View style={style.header}>
+        <View>
+          <Text style={{color: colors.dark, fontSize: 20, fontWeight: 'bold'}}>
+            <TouchableOpacity onPress={()=>logout()}>
+              <Text>
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
+        {/* <Image
+          style={style.profileImage}
+          source={require('../../assets/person.jpg')}
+        /> */}
+      </View>
+
+    </SafeAreaView>
+
   );
 };
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#001f5c',
-    alignItems: 'center',
-    justifyContent: 'center',
+const style = StyleSheet.create({
+  header: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
-  logo:{
-    fontWeight:"bold",
-    fontSize:50,
-    color:"#fb5b5a",
-    marginBottom:40
-  },
-  inputView:{
-    width:"80%",
-    backgroundColor:"#465881",
-    borderRadius:25,
-    height:50,
-    marginBottom:20,
-    justifyContent:"center",
-    padding:20
-  },
-  inputText:{
-    height:50,
-    color:"white"
-  },
-  forgot:{
-    color:"white",
-    fontSize:11
-  },
-  loginBtn:{
-    width:"80%",
-    backgroundColor:"#0000ff",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:40,
-    marginBottom:10
-  },
-  loginText:{
-    color:"white"
-  }
+
 });
